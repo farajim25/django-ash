@@ -1,0 +1,14 @@
+<div class="datetime row">
+  <div class="col-12 mt-1">
+    <div class="input-group bg-transparent {% block extra_date_class %}{% endblock %}">
+        <div class="input-group-prepend"><div class="input-group-text px-2">{{ date_label }}</div></div>
+        {% with widget=widget.subwidgets.0 %}{% include widget.template_name %}{% endwith %}
+    </div>
+  </div>
+  <div class="col-12 mt-1">
+    <div class="input-group bg-transparent {% block extra_time_class %}{% endblock %}">
+        <div class="input-group-prepend"><div class="input-group-text px-2">{{ time_label }}</div></div>
+        {% with widget=widget.subwidgets.1 %}{% include widget.template_name %}{% endwith %}
+    </div>
+  </div>
+</div>

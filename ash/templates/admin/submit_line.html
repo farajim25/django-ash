@@ -1,0 +1,17 @@
+{% load i18n admin_urls %}
+<div class="row justify-content-end mt-4 mx-2">
+{% block submit-row %}
+{% if show_delete_link and original %}
+    {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
+    <div class="col-sm-12 col-md-auto px-1">
+    <a class="form-control btn btn-danger" href="{% add_preserved_filters delete_url %}">{% trans "Delete" %}</a>
+    </div>
+{% endif %}
+<div class="col px-0"></div>
+{% if show_save %}<div class="col-sm-12 col-md-auto px-1"><input class="form-control btn btn-primary" type="submit" value="{% trans 'Save' %}" name="_save"></div>{% endif %}
+{% if show_save_as_new %}<div class="col-sm-12 col-md-auto px-1"><input class="form-control btn btn-primary" type="submit" value="{% trans 'Save as new' %}" name="_saveasnew"></div>{% endif %}
+{% if show_save_and_add_another %}<div class="col-sm-12 col-md-auto px-1"><input class="form-control btn btn-primary" type="submit" value="{% trans 'Save and add another' %}" name="_addanother"></div>{% endif %}
+{% if show_save_and_continue %}<div class="col-sm-12 col-md-auto px-1"><input  class="form-control btn btn-primary" type="submit" value="{% if can_change %}{% trans 'Save and continue editing' %}{% else %}{% trans 'Save and view' %}{% endif %}" name="_continue"></div>{% endif %}
+{% if show_close %}<div class="col-sm-12 col-md-auto px-1"><a class="form-control btn btn-dark" href="{% url opts|admin_urlname:'changelist' %}">{% trans 'Close' %}</a></div>{% endif %}
+{% endblock %}
+</div>

@@ -1,0 +1,20 @@
+{% load i18n %}
+
+<nav class="pcoded-navbar navbar-collapsed">
+    <div class="navbar-wrapper">
+        <!-- put Logo is hear -->
+        <div class="navbar-brand header-logo">
+            <a href="{% url "admin:index" %}" class="b-brand">
+                <div class="b-bg">
+                    <i class="feather icon-trending-up"></i>
+                </div>
+                <span class="b-title">{{ ash_header|default:'Django Ash' }}</span>
+            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+        </div>
+        <!-- end Logo is hear -->
+        {% if not is_popup %}
+            {% include 'admin/app_list.html' with app_list=available_apps show_changelinks=False nav_menu=True %}
+        {% endif %}
+    </div>
+</nav>

@@ -1,0 +1,104 @@
+from django import template
+from django.contrib.admin import widgets as AdminWidgets
+from django.contrib.admin.views.main import PAGE_VAR
+from django.contrib.messages import constants
+from django.forms import BaseForm
+from django.forms import widgets as FormWidgets
+from django.utils.html import format_html
+
+register = template.Library()
+
+
+@register.simple_tag
+def ash_form_class_setter(form, **kwargs):
+    if isinstance(form, BaseForm):
+        for field in form:
+            ash_form_field_class_setter(field, **kwargs)
+
+    return str()
+
+
+@register.simple_tag
+def ash_form_field_class_setter(field, **kwargs):
+    ash_form_field_widget_class_setter(field.field.widget, **kwargs)
+    return field
+
+
+@register.simple_tag
+def ash_form_field_widget_class_setter(widget, **kwargs):
+    klass = widget.__class__
+    small_widget = kwargs.get('small_widget', False)
+
+    if issubclass(klass, AdminWidgets.AdminSplitDateTime):
+        if small_widget:
+            widget.template_name = 'admin/widgets/split_datetime_small.html'
+
+        for w in widget.widgets:
+            ash_form_field_widget_class_setter(w)
+
+        return widget
+
+    if issubclass(klass, AdminWidgets.RelatedFieldWidgetWrapper):
+        ash_form_field_widget_class_setter(widget.widget)
+        return widget
+
+    if issubclass(klass, FormWidgets.CheckboxInput):
+        old_class = widget.attrs.get('class', '')
+        widget.attrs['class'] = f'{old_class} px-2'
+        return widget
+
+    if issubclass(klass, AdminWidgets.AdminRadioSelect):
+        return widget
+
+    # general case
+    old_class = widget.attrs.get('class', '')
+    widget.attrs['class'] = f'{old_class} form-control px-2'
+    return widget
+
+
+@register.simple_tag
+def ash_messages_class_setter(messages):
+    def add_extra_tag(extra_tags, new_tag):
+        if extra_tags:
+            return f'{extra_tags} {new_tag} '
+        else:
+            return new_tag
+
+    for msg in messages:
+        level = msg.level
+        if level == constants.DEBUG:
+            msg.extra_tags = add_extra_tag(msg.extra_tags, 'text-muted')
+        elif level == constants.INFO:
+            msg.extra_tags = add_extra_tag(msg.extra_tags, 'text-info')
+        elif level == constants.SUCCESS:
+            msg.extra_tags = add_extra_tag(msg.extra_tags, 'text-success')
+        elif level == constants.WARNING:
+            msg.extra_tags = add_extra_tag(msg.extra_tags, 'text-warning')
+        elif level == constants.ERROR:
+            msg.extra_tags = add_extra_tag(msg.extra_tags, 'text-danger')
+
+    return str()
+
+
+@register.simple_tag
+def ash_paginator_number(cl, i):
+    link_text = ''
+    link_href = ''
+
+    if i == cl.paginator.ELLIPSIS:
+        link_text = cl.paginator.ELLIPSIS
+        link_href = ''
+
+    elif i == cl.page_num:
+        link_href = ''
+        link_text = i
+
+    else:
+        link_href = f'href="{cl.get_query_string({PAGE_VAR: i})}"'
+        link_text = i
+
+    return format_html(
+        '<a {} class="page-link">{}</a>',
+        link_href,
+        link_text,
+    )

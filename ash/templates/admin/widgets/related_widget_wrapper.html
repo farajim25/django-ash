@@ -1,0 +1,33 @@
+{% load i18n static %}
+<div class="related-widget-wrapper input-group bg-transparent align-items-center">
+    <div>{{ rendered_widget }}</div>
+    {% block links %}
+        {% spaceless %}
+        {% if not is_hidden %}
+        {% if can_change_related %}
+        <div class="input-group-append">
+        <a class="related-widget-wrapper-link change-related btn px-3 btn-info text-white" id="change_id_{{ name }}"
+            data-href-template="{{ change_related_template_url }}?{{ url_params }}"
+            title="{% blocktranslate %}Change selected {{ model }}{% endblocktranslate %}">
+             <i class="feather icon-edit-2 m-0"></i>
+        </a>
+        {% endif %}
+        {% if can_add_related %}
+        <a class="related-widget-wrapper-link add-related btn px-3 btn-success text-white" id="add_id_{{ name }}"
+            href="{{ add_related_url }}?{{ url_params }}"
+            title="{% blocktranslate %}Add another {{ model }}{% endblocktranslate %}">
+            <i class="feather icon-plus m-0"></i>
+        </a>
+        {% endif %}
+        {% if can_delete_related %}
+        <a class="related-widget-wrapper-link delete-related btn px-3 btn-danger text-white" id="delete_id_{{ name }}"
+            data-href-template="{{ delete_related_template_url }}?{{ url_params }}"
+            title="{% blocktranslate %}Delete selected {{ model }}{% endblocktranslate %}">
+            <i class="feather icon-x m-0"></i>
+        </a>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% endspaceless %}
+    {% endblock %}
+</div>

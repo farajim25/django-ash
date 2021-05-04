@@ -1,0 +1,16 @@
+<div class="input-group bg-transparent">
+    <div class="input-group-prepend">
+        {% if link_label %}
+        <strong class="input-group-text px-2" >{% if link_url %}<a href="{{ link_url }}">{% endif %}{{ link_label }}{% if link_url %}</a>{% endif %}
+        </strong>
+        {% endif %}
+    </div>
+    <div>
+    {% include 'django/forms/widgets/input.html' %}
+    </div>
+    <div class="input-group-append">
+        {% if related_url %}
+        <a href="{{ related_url }}" class="btn btn-primary px-3 related-lookup" id="lookup_id_{{ widget.name }}" title="{{ link_title }}"><i class="feather icon-search m-0"></i></a>
+    </div>
+{% endif %}
+</div>

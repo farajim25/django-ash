@@ -1,0 +1,12 @@
+{% load i18n %}
+<h5>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h5>
+<ul class="list-group filters">
+{% for choice in choices %}
+    <a href="{{ choice.query_string|iriencode }}" title="{{ choice.display }}">
+    <li class="list-group-item {% if choice.selected %} active {% endif %} py-2">
+        {{ choice.display }}
+    </li>
+    </a>
+{% endfor %}
+</ul>
+<br/>

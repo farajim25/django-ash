@@ -1,0 +1,21 @@
+{% load i18n ash_tags %}
+
+<div class="paginator row">
+{% if pagination_required %}
+    <div class="col-sm-12 col-md-auto d-flex align-items-center justify-content-center">
+    <ul class="pagination">
+        {% for i in page_range %}
+            <li class="page-item {% if i == cl.page_num %}active{% elif i == cl.paginator.ELLIPSIS %}disabled{% endif %}">
+                {% ash_paginator_number cl i %}
+            </li>
+        {% endfor %}
+    </ul>
+    </div>
+{% endif %}
+<div class="col-sm-12 col-md-auto d-flex align-items-center justify-content-center mb-3">
+{{ cl.result_count }} {% if cl.result_count == 1 %}{{ cl.opts.verbose_name }}{% else %}{{ cl.opts.verbose_name_plural }}{% endif %}
+{% if show_all_url %}<a href="{{ show_all_url }}" class="showall px-2">{% translate 'Show all' %}</a>{% endif %}
+</div>
+<div class="col px-0"></div>
+{% if cl.formset and cl.result_count %}<div class="col-sm-12 col-md-auto"><input type="submit" name="_save" class="form-control btn btn-primary" value="{% translate 'Save' %}"></div>{% endif %}
+</div>
