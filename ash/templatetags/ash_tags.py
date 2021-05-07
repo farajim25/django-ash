@@ -26,10 +26,11 @@ def ash_form_field_class_setter(field, **kwargs):
 
 @register.simple_tag
 def ash_form_field_widget_class_setter(widget, **kwargs):
-    klass = widget.__class__
+    default_new_class = 'form-control px-2'
+    
     small_widget = kwargs.get('small_widget', False)
-
-    if issubclass(klass, AdminWidgets.AdminSplitDateTime):
+    
+    if isinstance(widget, AdminWidgets.AdminSplitDateTime):
         if small_widget:
             widget.template_name = 'admin/widgets/split_datetime_small.html'
 
@@ -38,21 +39,26 @@ def ash_form_field_widget_class_setter(widget, **kwargs):
 
         return widget
 
-    if issubclass(klass, AdminWidgets.RelatedFieldWidgetWrapper):
+    if isinstance(widget, AdminWidgets.RelatedFieldWidgetWrapper):
         ash_form_field_widget_class_setter(widget.widget)
         return widget
 
-    if issubclass(klass, FormWidgets.CheckboxInput):
+    if isinstance(widget, FormWidgets.CheckboxInput):
         old_class = widget.attrs.get('class', '')
         widget.attrs['class'] = f'{old_class} px-2'
         return widget
 
-    if issubclass(klass, AdminWidgets.AdminRadioSelect):
+    if isinstance(widget, FormWidgets.PasswordInput):
+        old_class = widget.attrs.get('class', '')
+        widget.attrs['class'] = f'{old_class} vLargeTextField {default_new_class}'
+        return widget
+
+    if isinstance(widget, AdminWidgets.AdminRadioSelect):
         return widget
 
     # general case
     old_class = widget.attrs.get('class', '')
-    widget.attrs['class'] = f'{old_class} form-control px-2'
+    widget.attrs['class'] = f'{old_class} {default_new_class}'
     return widget
 
 
