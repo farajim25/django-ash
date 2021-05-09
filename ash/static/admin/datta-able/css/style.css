@@ -10616,4 +10616,7 @@ div.code-toolbar > .toolbar span:hover {
 .hidden{
   display: none;
 }
+.action-checkbox-column {
+  width: 30px;
+}
 /**====== Django ASH css end ======**/
