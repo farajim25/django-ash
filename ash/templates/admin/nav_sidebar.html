@@ -2,7 +2,7 @@
 
 <nav class="pcoded-navbar navbar-collapsed">
     <div class="navbar-wrapper">
-        <!-- put Logo is hear -->
+        <!-- put Logo in hear -->
         <div class="navbar-brand header-logo">
             <a href="{% url "admin:index" %}" class="b-brand">
                 <div class="b-bg">
@@ -12,7 +12,7 @@
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
         </div>
-        <!-- end Logo is hear -->
+        <!-- end Logo in hear -->
         {% if not is_popup %}
             {% include 'admin/app_list.html' with app_list=available_apps show_changelinks=False nav_menu=True %}
         {% endif %}

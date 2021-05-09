@@ -4,12 +4,12 @@
       <div class="navbar-content scroll-div">
           <ul class="nav pcoded-inner-navbar">
           {% for app in app_list %}
-              <li data-username="GG" class="nav-item pcoded-hasmenu">
+              <li class="nav-item pcoded-hasmenu">
                   <a href="javascript:" class="nav-link ">
                   <span class="pcoded-micon">
                       <i class="feather icon-box"></i>
                   </span>
-                  <span class="pcoded-mtext">{% blocktrans with name=app.name %}{{name}}{% endblocktrans %}</span>
+                  <span class="pcoded-mtext">{% blocktrans with name=app.name|truncatechars:20 %}{{name}}{% endblocktrans %}</span>
                   </a>
                   <ul class="pcoded-submenu">
                   {% for model in app.models %}
