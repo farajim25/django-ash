@@ -152,7 +152,7 @@ form .aligned table p {
 }
 
 .errorlist {
-    color: #dc3545;
+    color: var(--danger);
 }
 
 .aligned .vCheckboxLabel {
@@ -357,15 +357,15 @@ body.popup .submit-row {
 }
 
 .vTextField, .vUUIDField {
-    width: 20em;
+    width: 25em;
 }
 
 .vIntegerField {
     width: 8em;
 }
 
-.vBigIntegerField {
-    width: 20em;
+.vBigIntegerField, .vNumberField {
+    width: 17em;
 }
 
 .vForeignKeyRawIdAdminField {
