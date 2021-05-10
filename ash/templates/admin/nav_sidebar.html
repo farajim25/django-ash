@@ -4,7 +4,7 @@
     <div class="navbar-wrapper">
         <!-- put Logo in hear -->
         <div class="navbar-brand header-logo">
-            <a href="{% url "admin:index" %}" class="b-brand">
+            <a href="{% if not is_popup %}{% url "admin:index" %}{% else %}#{% endif %}" class="b-brand">
                 <div class="b-bg">
                     <i class="feather icon-trending-up"></i>
                 </div>
