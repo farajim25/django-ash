@@ -1,0 +1,38 @@
+{% extends "admin/import_export/base.html" %}
+{% load i18n %}
+{% load admin_urls %}
+{% load import_export_tags %}
+
+{% block breadcrumbs_last %}
+{% trans "Export" %}
+{% endblock %}
+
+{% block content_content %}
+<form action="" method="POST">
+  {% csrf_token %}
+
+    <fieldset class="module aligned">
+    {% for field in form %}
+      <div class="form-row row">
+        <div class="offset-md-2 col-md-10 error-container">
+          {{ field.errors }}
+        </div>
+        <div class="col-md-2 mt-2">
+          {{ field.label_tag }}
+        </div>
+        <div class="col-md-10 {% if field.is_checkbox %}mt-2{% endif %} vTextField">
+          {{ field }}
+        </div>
+        {% if field.field.help_text %}
+          <div class="offset-md-2 col-md-10">{{ field.field.help_text|safe }}</div>
+        {% endif %}
+      </div>
+        {% endfor %}
+    </fieldset>
+
+    <div class="row justify-content-end mt-4 mx-2">
+      <div class="col px-0"></div>
+      <div class="col-sm-12 col-md-auto px-1"><input type="submit" class="default form-control btn btn-primary" value="{% trans "Submit" %}"></div>
+    </div>
+</form>
+{% endblock %}
