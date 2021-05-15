@@ -14,12 +14,6 @@
 {% block ash_block_form_class_setter %}
   {{ block.super }}
   {% ash_form_class_setter adminform.form %} 
-
-  {% for inline_admin_formset in inline_admin_formsets %}
-    {% for form in inline_admin_formset %}
-      {% ash_form_class_setter form %} 
-    {% endfor %}
-  {% endfor %}
 {% endblock ash_block_form_class_setter %}
 
 {% if not is_popup %}
