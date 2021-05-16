@@ -391,7 +391,7 @@ body.popup .submit-row {
     position: relative;
 }
 
-.inline-related h3 {
+.inline-related h6 {
     margin: 0;
     color: var(--body-quiet-color);
     padding: 5px;
@@ -401,11 +401,11 @@ body.popup .submit-row {
     border-bottom: 1px solid var(--hairline-color);
 }
 
-.inline-related h3 span.delete {
+.inline-related h6 span.delete {
     float: right;
 }
 
-.inline-related h3 span.delete label {
+.inline-related h6 span.delete label {
     margin-left: 2px;
     font-size: 11px;
 }
@@ -448,11 +448,13 @@ body.popup .submit-row {
     padding: 2px 0 0 0;
     width: 0;
     _position: relative;
+    display: none;
 }
 
 .inline-group .tabular th.original {
-    width: 0px;
+    width: 0;
     padding: 0;
+    display: none;
 }
 
 .inline-group .tabular td.original p {
