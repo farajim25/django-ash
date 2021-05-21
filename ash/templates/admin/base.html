@@ -64,6 +64,7 @@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li><a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()"><i class="feather icon-maximize"></i></a></li>
+                    {% comment %} 
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle" href="javascript:" data-toggle="dropdown">Dropdown</a>
                         <ul class="dropdown-menu">
@@ -72,6 +73,9 @@
                             <li><a class="dropdown-item" href="javascript:">Something else here</a></li>
                         </ul>
                     </li>
+                    {% endcomment %}
+
+                    {% comment %} 
                     <li class="nav-item">
                         <div class="main-search">
                             <div class="input-group">
@@ -85,8 +89,10 @@
                             </div>
                         </div>
                     </li>
+                    {% endcomment %}
                 </ul>
                 <ul class="navbar-nav ml-auto">
+                    {% comment %}
                     <li>
                         <div class="dropdown">
                             <a class="dropdown-toggle" href="javascript:" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
@@ -139,6 +145,7 @@
                             </div>
                         </div>
                     </li>
+                    {% endcomment %}
                     {% block usertools %}
                       {% if has_permission %}
                         <li>
