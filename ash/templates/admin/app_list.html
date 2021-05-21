@@ -1,22 +1,33 @@
-{% load i18n %}
+{% load i18n ash_tags %}
 {% if nav_menu %}
   {% if app_list %}
       <div class="navbar-content scroll-div">
           <ul class="nav pcoded-inner-navbar">
           {% for app in app_list %}
-              <li class="nav-item pcoded-hasmenu">
-                  <a href="javascript:" class="nav-link ">
-                  <span class="pcoded-micon">
-                      <i class="feather icon-box"></i>
-                  </span>
-                  <span class="pcoded-mtext">{% blocktrans with name=app.name|truncatechars:20 %}{{name}}{% endblocktrans %}</span>
-                  </a>
-                  <ul class="pcoded-submenu">
-                  {% for model in app.models %}
-                      <li class=""><a href="{{ model.admin_url }}" class="">{{ model.name }}</a></li>
-                  {% endfor %}
-                  </ul>
-              </li>
+              {% if app.models|length > 1 %}
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="javascript:" class="nav-link ">
+                    <span class="pcoded-micon">
+                        <i class="feather {% ash_get_model_icon app.app_label %} "></i>
+                    </span>
+                    <span class="pcoded-mtext">{% blocktrans with name=app.name|truncatechars:20 %}{{name}}{% endblocktrans %}</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                    {% for model in app.models %}
+                        <li class=""><a href="{{ model.admin_url }}" class="">{{ model.name }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </li>
+              {% else %}
+                  <li class="nav-item">
+                    <a href="javascript:" class="nav-link ">
+                    <span class="pcoded-micon">
+                        <i class="feather {% ash_get_model_icon app.app_label %} "></i>
+                    </span>
+                    <span class="pcoded-mtext">{% blocktrans with name=app.models.0.name|truncatechars:20 %}{{name}}{% endblocktrans %}</span>
+                    </a>
+                  </li>
+              {% endif %}
           {% endfor %}
           </ul>
       </div>

@@ -1,4 +1,6 @@
+from ash import settings
 from django import template
+from django.apps import apps
 from django.contrib.admin import widgets as AdminWidgets
 from django.contrib.admin.views.main import PAGE_VAR
 from django.contrib.messages import constants
@@ -7,6 +9,17 @@ from django.forms import widgets as FormWidgets
 from django.utils.html import format_html
 
 register = template.Library()
+
+
+@register.simple_tag
+def ash_get_setting(setting_name):
+    return getattr(settings, setting_name)
+
+
+@register.simple_tag
+def ash_get_model_icon(app_label):
+    conf = apps.get_app_config(app_label)
+    return getattr(conf, 'ASH_APP_ICON', settings.ASH_APPS_DEFAULT_ICON)
 
 
 @register.simple_tag
@@ -27,9 +40,9 @@ def ash_form_field_class_setter(field, **kwargs):
 @register.simple_tag
 def ash_form_field_widget_class_setter(widget, **kwargs):
     default_new_class = 'form-control px-2'
-    
+
     small_widget = kwargs.get('small_widget', False)
-    
+
     if isinstance(widget, AdminWidgets.AdminSplitDateTime):
         if small_widget:
             widget.template_name = 'admin/widgets/split_datetime_small.html'

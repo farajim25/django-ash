@@ -1,14 +1,13 @@
-{% load i18n %}
-
+{% load i18n ash_tags %}
 <nav class="pcoded-navbar navbar-collapsed">
     <div class="navbar-wrapper">
         <!-- put Logo in hear -->
         <div class="navbar-brand header-logo">
             <a href="{% if not is_popup %}{% url "admin:index" %}{% else %}#{% endif %}" class="b-brand">
                 <div class="b-bg">
-                    <i class="feather icon-trending-up"></i>
+                    <i class="feather {% ash_get_setting "ASH_SITE_LOGO_ICON"  %}"></i>
                 </div>
-                <span class="b-title">{{ ash_header|default:'Django Ash' }}</span>
+                <span class="b-title">{% ash_get_setting "ASH_SITE_HEADER"  %}</span>
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
         </div>
