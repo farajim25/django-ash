@@ -502,7 +502,10 @@ body.popup .submit-row {
 }
 
 .empty-form {
-    display: none;
+    display: none !important;
+}
+.display-table-row{
+    display: table-row;
 }
 
 /* RELATED FIELD ADD ONE / LOOKUP */

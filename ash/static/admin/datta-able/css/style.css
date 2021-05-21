@@ -6977,9 +6977,9 @@ select.form-control-lg:not([size]):not([multiple]) {
 }
 
 /* form-select */
-.select2-container {
+/* .select2-container {
   width: 100% !important;
-}
+} */
 
 .tt-menu {
   position: absolute;
