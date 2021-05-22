@@ -35,6 +35,7 @@ class InputFilter(FieldListFilter):
 
 
 class AutoCompleteFilter(FieldListFilter):
+    _request_key = 'DJANGO_ASH_ATOCOMPLETE_ADMIN_MEDIA'
     template = 'filters/auto_complete_filter.html'
 
     def __init__(self, field, request, params, model, model_admin, field_path):
@@ -64,10 +65,10 @@ class AutoCompleteFilter(FieldListFilter):
         return [self.parameter_name]
 
     def get_form(self, request):
-        form_class = self._get_form_class()
+        form_class = self._get_form_class(request)
         return form_class(self.used_parameters or None)
 
-    def _get_form_class(self):
+    def _get_form_class(self, request):
         fields = self._get_form_fields()
 
         form_class = type(
@@ -75,6 +76,12 @@ class AutoCompleteFilter(FieldListFilter):
             (forms.BaseForm,),
             {'base_fields': fields}
         )
+
+        has_media = getattr(request, self._request_key, False)
+        if not has_media:
+            form_class.media_list = form_class.media
+            setattr(request, self._request_key, True)
+
         return form_class
 
     def _get_form_fields(self):
