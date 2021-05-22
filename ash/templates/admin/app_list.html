@@ -20,7 +20,7 @@
                 </li>
               {% else %}
                   <li class="nav-item">
-                    <a href="javascript:" class="nav-link ">
+                    <a href="{{ app.models.0.admin_url }}" class="nav-link ">
                     <span class="pcoded-micon">
                         <i class="feather {% ash_get_model_icon app.app_label %} "></i>
                     </span>
