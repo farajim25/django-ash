@@ -1,0 +1,26 @@
+{% load i18n static %}
+
+<h5>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h5>
+
+<div>
+  {% with choices.0 as all_choice %}
+    <form method="GET" action="">
+
+      {% for k, v in all_choice.query_parts %}
+        <input type="hidden" name="{{ k }}" value="{{ v }}" />
+      {% endfor %}
+      <div class="input-group">
+        <input  class="form-control p-2"
+                type="text"
+                value="{{ spec.value|default_if_none:'' }}"
+                name="{{ spec.parameter_name }}"/>
+        {% if not all_choice.selected %}
+          <div class="input-group-append">
+              <a class="btn btn-danger" href="{{ all_choice.query_string }}"><i class="feather icon-x m-0"></i></a>
+          </div>
+        {% endif %}
+      </div>
+    </form>
+  {% endwith %}
+</div>
+</br>

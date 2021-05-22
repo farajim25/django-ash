@@ -1,0 +1,23 @@
+{% load i18n static %}
+
+{{spec.form.media}}
+<script type="text/javascript">
+    function submit_ac_form(e){
+      e.parentNode.parentNode.submit()
+    }
+</script>
+
+<h5>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h5>
+<div>
+  {% with choices.0 as all_choice %}
+    <form method="GET" action="">
+      {% for k, v in all_choice.query_parts %}
+        <input type="hidden" name="{{ k }}" value="{{ v }}" />
+      {% endfor %}
+      <div class="input-group">
+        {{spec.form}}
+      </div>
+    </form>
+  {% endwith %}
+</div>
+</br>
