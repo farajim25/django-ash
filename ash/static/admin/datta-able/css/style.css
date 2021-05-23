@@ -10609,7 +10609,7 @@ div.code-toolbar > .toolbar span:hover {
 }
 .sidebar-main-addlink{
   position: absolute!important;
-  top: 10px;
+  top: 9px;
   right: 12px;
   transition: 0.3s ease-in-out;
   z-index: 2048;
@@ -10617,7 +10617,7 @@ div.code-toolbar > .toolbar span:hover {
 }
 .sidebar-sub-addlink{
   position: absolute!important;
-  top: 2px;
+  top: 1px;
   right: 12px;
   transition: 0.3s ease-in-out;
   z-index: 2048;
@@ -10630,6 +10630,10 @@ div.code-toolbar > .toolbar span:hover {
 .pcoded-navbar.navbar-collapsed .pcoded-inner-navbar a.sidebar-sub-addlink{
   right: 4px !important;
   transition: right 0s;
+  opacity: 0;
+}
+.pcoded-navbar.navbar-collapsed:hover .pcoded-inner-navbar a.sidebar-main-addlink {
+  opacity: 1;
 }
 
 .filters .list-group-item {
