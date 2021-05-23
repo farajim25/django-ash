@@ -10632,7 +10632,8 @@ div.code-toolbar > .toolbar span:hover {
   transition: right 0s;
   opacity: 0;
 }
-.pcoded-navbar.navbar-collapsed:hover .pcoded-inner-navbar a.sidebar-main-addlink {
+.pcoded-navbar.navbar-collapsed:hover .pcoded-inner-navbar a.sidebar-main-addlink,
+.pcoded-navbar.navbar-collapsed:hover .pcoded-inner-navbar a.sidebar-sub-addlink {
   opacity: 1;
 }
 
