@@ -10607,6 +10607,31 @@ div.code-toolbar > .toolbar span:hover {
 .side-bar .table tr:first-child td {
   border-top: 0;
 }
+.sidebar-main-addlink{
+  position: absolute!important;
+  top: 10px;
+  right: 12px;
+  transition: 0.3s ease-in-out;
+  z-index: 2048;
+  padding: 8px;
+}
+.sidebar-sub-addlink{
+  position: absolute!important;
+  top: 2px;
+  right: 12px;
+  transition: 0.3s ease-in-out;
+  z-index: 2048;
+  padding: 8px;
+}
+.sidebar-main-addlink:hover, .sidebar-sub-addlink:hover{
+  color: var(--primary)
+}
+.pcoded-navbar.navbar-collapsed .pcoded-inner-navbar a.sidebar-main-addlink,
+.pcoded-navbar.navbar-collapsed .pcoded-inner-navbar a.sidebar-sub-addlink{
+  right: 4px !important;
+  transition: right 0s;
+}
+
 .filters .list-group-item {
   border: none;
 }

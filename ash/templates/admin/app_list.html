@@ -14,19 +14,29 @@
                     </a>
                     <ul class="pcoded-submenu">
                     {% for model in app.models %}
-                        <li class=""><a href="{{ model.admin_url }}" class="">{{ model.name }}</a></li>
+                        <li class="position-relative">
+                          <a href="{{ model.admin_url }}" class="">{{ model.name }}</a>
+                          {% if model.add_url %}
+                            <div><a href="{{ model.add_url }}" class="sidebar-sub-addlink"><i class="feather icon-plus f-15"></i></a></div>
+                          {% endif %}
+                        </li>
                     {% endfor %}
                     </ul>
                 </li>
               {% else %}
+                  {% with app.models.0 as model %}
                   <li class="nav-item">
-                    <a href="{{ app.models.0.admin_url }}" class="nav-link ">
+                    <a href="{{ model.admin_url }}" class="nav-link ">
                     <span class="pcoded-micon">
                         <i class="feather {% ash_get_model_icon app.app_label %} "></i>
                     </span>
-                    <span class="pcoded-mtext">{% blocktrans with name=app.models.0.name|truncatechars:20 %}{{name}}{% endblocktrans %}</span>
+                    <span class="pcoded-mtext">{% blocktrans with name=model.name|truncatechars:20 %}{{name}}{% endblocktrans %}</span>
                     </a>
+                    {% if model.add_url %}
+                      <div><a href="{{ model.add_url }}" class="sidebar-main-addlink"><i class="feather icon-plus f-15"></i></a></div>
+                    {% endif %}
                   </li>
+                  {% endwith %}
               {% endif %}
           {% endfor %}
           </ul>
