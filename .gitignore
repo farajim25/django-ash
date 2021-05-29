@@ -128,6 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# rtl 
+ash/static/admin/datta-able/css/layout/rtl.css
 
 temp__*/
 .vscode/
