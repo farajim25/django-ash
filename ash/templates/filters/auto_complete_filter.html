@@ -1,11 +1,7 @@
 {% load i18n static %}
 
-{{spec.form.media_list}}
-<script type="text/javascript">
-    function submit_ac_form(e){
-      e.parentNode.parentNode.submit()
-    }
-</script>
+{{spec.form.base_media}}
+{{spec.form.filter_media}}
 
 <h5>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h5>
 <div>

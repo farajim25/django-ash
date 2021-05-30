@@ -3,6 +3,7 @@ from collections import OrderedDict
 from django import forms
 from django.contrib.admin import widgets
 from django.contrib.admin.filters import FieldListFilter
+from django.forms.widgets import Media
 from django.utils.translation import gettext_lazy as _
 
 
@@ -79,7 +80,11 @@ class AutoCompleteFilter(FieldListFilter):
 
         has_media = getattr(request, self._request_key, False)
         if not has_media:
-            form_class.media_list = form_class.media
+            media = Media(
+                js=['admin/js/autocomplete-filter.js']
+            )
+            form_class.base_media = form_class.media
+            form_class.filter_media = media
             setattr(request, self._request_key, True)
 
         return form_class
@@ -94,10 +99,15 @@ class AutoCompleteFilter(FieldListFilter):
                         field=self.field,
                         admin_site=self.model_admin.admin_site,
                         attrs={'style': "width: 100%",
-                               'onchange': "submit_ac_form(this)"}
+                               'autocomplete-filter': True}
                     ),
                     required=False,
                     initial=self.value(),
                 )),
             )
         )
+
+    def queryset(self, request, queryset):
+        if self.value():
+            queryset = queryset.filter(**self.used_parameters)
+        return queryset
