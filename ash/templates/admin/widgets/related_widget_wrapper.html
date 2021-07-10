@@ -4,8 +4,8 @@
     {% block links %}
         {% spaceless %}
         {% if not is_hidden %}
-        {% if can_change_related %}
         <div class="input-group-append">
+        {% if can_change_related %}
         <a class="related-widget-wrapper-link change-related btn px-3 btn-info text-white" id="change_id_{{ name }}"
             data-href-template="{{ change_related_template_url }}?{{ url_params }}"
             title="{% blocktranslate %}Change selected {{ model }}{% endblocktranslate %}">
@@ -25,8 +25,8 @@
             title="{% blocktranslate %}Delete selected {{ model }}{% endblocktranslate %}">
             <i class="feather icon-x m-0"></i>
         </a>
-        </div>
         {% endif %}
+        </div>
         {% endif %}
         {% endspaceless %}
     {% endblock %}
