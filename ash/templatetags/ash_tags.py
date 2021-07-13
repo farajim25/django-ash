@@ -71,6 +71,11 @@ def ash_form_field_widget_class_setter(widget, **kwargs):
         widget.attrs['class'] = f'{old_class} vNumberField {default_new_class}'
         return widget
 
+    if isinstance(widget, FormWidgets.ChoiceWidget):
+        old_class = widget.attrs.get('class', '')
+        widget.attrs['class'] = f'{old_class} vNumberField {default_new_class}'
+        return widget
+
     if isinstance(widget, AdminWidgets.AdminRadioSelect):
         return widget
 
