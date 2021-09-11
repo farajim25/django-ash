@@ -51,7 +51,7 @@
         <header class="navbar pcoded-header navbar-expand-lg navbar-light">
             <div class="m-header">
                 <a class="mobile-menu" id="mobile-collapse1" href="javascript:"><span></span></a>
-                <a href="index.html" class="b-brand">
+                <a href="{% if not is_popup %}{% url "admin:index" %}{% else %}#{% endif %}" class="b-brand">
                       <div class="b-bg">
                           <i class="feather {% ash_get_setting "ASH_SITE_LOGO_ICON" %}"></i>
                       </div>
