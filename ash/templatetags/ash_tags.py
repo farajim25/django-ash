@@ -123,7 +123,7 @@ def ash_paginator_number(cl, i):
         link_text = i
 
     else:
-        link_href = f'href="{cl.get_query_string({PAGE_VAR: i})}"'
+        link_href = f'href={cl.get_query_string({PAGE_VAR: i})}'
         link_text = i
 
     return format_html(
