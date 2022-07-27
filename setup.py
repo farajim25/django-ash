@@ -18,7 +18,7 @@ def get_install_requires():
 setup(
     name='django-ash',
     version=__import__('ash').VERSION,
-    description='Bootstap Template for Django admin interface',
+    description='Django Admin Theme based on Datta Able',
     long_description=read('README.rst'),
     author='Mohammad Faraji',
     author_email='farajim25@gmail.com',
