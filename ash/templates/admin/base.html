@@ -237,7 +237,9 @@
                                                     <i class="feather icon-more-horizontal"></i>
                                                 </button>
                                                 <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                                    <li class="dropdown-item full-card"><a href="javascript:"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                                    {% if not LANGUAGE_BIDI %}
+                                                      <li class="dropdown-item full-card"><a href="javascript:"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                                    {% endif %}
                                                     <li class="dropdown-item minimize-card"><a href="javascript:"><span><i class="feather icon-minus"></i>Collapse</span><span style="display:none"><i class="feather icon-plus"></i> Expand</span></a></li>
                                                     {% comment %} <li class="dropdown-item reload-card"><a href="javascript:"><i class="feather icon-refresh-cw"></i> reload</a></li> {% endcomment %}
                                                     <li class="dropdown-item close-card"><a href="javascript:"><i class="feather icon-trash"></i>Remove</a></li>
@@ -271,7 +273,9 @@
                                                 <i class="feather icon-more-horizontal"></i>
                                             </button>
                                             <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                                <li class="dropdown-item full-card"><a href="javascript:"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                                {% if not LANGUAGE_BIDI %}
+                                                  <li class="dropdown-item full-card"><a href="javascript:"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                                {% endif %}
                                                 <li class="dropdown-item minimize-card"><a href="javascript:"><span><i class="feather icon-minus"></i>Collapse</span><span style="display:none"><i class="feather icon-plus"></i> Expand</span></a></li>
                                             </ul>
                                         </div>
@@ -297,7 +301,9 @@
                                                   <i class="feather icon-more-horizontal"></i>
                                               </button>
                                               <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                                                  <li class="dropdown-item full-card"><a href="javascript:"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                                  {% if not LANGUAGE_BIDI %}
+                                                    <li class="dropdown-item full-card"><a href="javascript:"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                                  {% endif %}
                                                   <li class="dropdown-item minimize-card"><a href="javascript:"><span><i class="feather icon-minus"></i>Collapse</span><span style="display:none"><i class="feather icon-plus"></i> Expand</span></a></li>
                                                   {% comment %} <li class="dropdown-item reload-card"><a href="javascript:"><i class="feather icon-refresh-cw"></i> reload</a></li> {% endcomment %}
                                                   {% comment %} <li class="dropdown-item close-card"><a href="javascript:"><i class="feather icon-trash"></i>Remove</a></li> {% endcomment %}
