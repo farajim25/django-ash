@@ -3,6 +3,9 @@ Django-Ash
 Django Admin Theme based on `Datta Able
 <https://github.com/codedthemes/datta-able-bootstrap-dashboard>`_.
 
+.. image:: https://github.com/farajim25/django-ash/blob/master/docs/images/login.png
+.. image:: https://github.com/farajim25/django-ash/blob/master/docs/images/index.png
+
 Requirements
 ------------
 * Django 2.0+
