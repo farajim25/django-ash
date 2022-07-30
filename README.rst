@@ -8,7 +8,7 @@ Django Admin Theme based on `Datta Able
 
 Requirements
 ------------
-* Django 2.0+
+* Django 3.0+
 
 
 Installation
