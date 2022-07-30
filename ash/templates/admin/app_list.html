@@ -10,12 +10,12 @@
                     <span class="pcoded-micon">
                         <i class="feather {% ash_get_model_icon app.app_label %} "></i>
                     </span>
-                    <span class="pcoded-mtext">{% blocktrans with name=app.name|truncatechars:20 %}{{name}}{% endblocktrans %}</span>
+                    <span title="{{app.name}}" class="pcoded-mtext">{% blocktrans with name=app.name|truncatechars:20 %}{{name}}{% endblocktrans %}</span>
                     </a>
                     <ul class="pcoded-submenu">
                     {% for model in app.models %}
                         <li class="position-relative">
-                          <a href="{{ model.admin_url }}" class="">{{ model.name }}</a>
+                          <a href="{{ model.admin_url }}" class="" title="{{model.name}}" >{% blocktrans with name=model.name|truncatechars:20 %}{{name}}{% endblocktrans %}</a>
                           {% if model.add_url %}
                             <div><a href="{{ model.add_url }}" class="sidebar-sub-addlink"><i class="feather icon-plus f-15"></i></a></div>
                           {% endif %}
@@ -30,7 +30,7 @@
                     <span class="pcoded-micon">
                         <i class="feather {% ash_get_model_icon app.app_label %} "></i>
                     </span>
-                    <span class="pcoded-mtext">{% blocktrans with name=model.name|truncatechars:20 %}{{name}}{% endblocktrans %}</span>
+                    <span title="{{model.name}}" class="pcoded-mtext">{% blocktrans with name=model.name|truncatechars:20 %}{{name}}{% endblocktrans %}</span>
                     </a>
                     {% if model.add_url %}
                       <div><a href="{{ model.add_url }}" class="sidebar-main-addlink"><i class="feather icon-plus f-15"></i></a></div>
