@@ -10649,4 +10649,7 @@ div.code-toolbar > .toolbar span:hover {
 .action-checkbox-column {
   width: 30px;
 }
+.table-wrap td, .table-wrap th{
+  white-space: initial !important;
+}
 /**====== Django ASH css end ======**/
