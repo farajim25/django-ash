@@ -3,9 +3,8 @@
 
 {% block breadcrumbs %}{% endblock %}
 
-{% block content_coltype %}col-lg-9{% endblock %}
-{% block content_content %}
-    <div id="content-main">
+{% block content %}
+    <div id="content-main" class="col-lg-9">
     {% include "admin/app_list.html" with app_list=app_list show_changelinks=True %}
     </div>
 {% endblock %}

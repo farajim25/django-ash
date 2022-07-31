@@ -10652,4 +10652,11 @@ div.code-toolbar > .toolbar span:hover {
 .table-wrap td, .table-wrap th{
   white-space: initial !important;
 }
+.app-table .label{
+  border-radius: 15px;
+}
+.app-table td {
+  border-top: 0;
+  border-bottom: 1px solid #eaeaea;
+}
 /**====== Django ASH css end ======**/

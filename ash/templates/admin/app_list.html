@@ -47,38 +47,54 @@
 {% else %}
   {% if app_list %}
     {% for app in app_list %}
-      <div class="app-{{ app.app_label }} module{% if app.app_url in request.path %} current-app{% endif %}">
-        <table>
-          <caption>
-            <a href="{{ app.app_url }}" class="section" title="{% blocktrans with name=app.name %}Models in the {{ name }} application{% endblocktrans %}">{{ app.name }}</a>
-          </caption>
-          {% for model in app.models %}
-            <tr class="model-{{ model.object_name|lower }}{% if model.admin_url in request.path %} current-model{% endif %}">
-              {% if model.admin_url %}
-                <th scope="row"><a href="{{ model.admin_url }}"{% if model.admin_url in request.path %} aria-current="page"{% endif %}>{{ model.name }}</a></th>
-              {% else %}
-                <th scope="row">{{ model.name }}</th>
-              {% endif %}
+        <div class="card">
+          <div class="card-header">
+            <h5>{{ app.name }}</h5>
+            <div class="card-header-right">
+              <div class="btn-group card-option">
+                  <button type="button" class="btn dropdown-toggle btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-Expand="false">
+                      <i class="feather icon-more-horizontal"></i>
+                  </button>
+                  <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                      {% if not LANGUAGE_BIDI %}
+                        <li class="dropdown-item full-card"><a href="javascript:"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                      {% endif %}
+                      <li class="dropdown-item minimize-card"><a href="javascript:"><span><i class="feather icon-minus"></i>Collapse</span><span style="display:none"><i class="feather icon-plus"></i> Expand</span></a></li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-block p-3">
+            <div class="app-{{ app.app_label }} module{% if app.app_url in request.path %} current-app{% endif %}">
+              <table class="app-table table table-hover">
+                {% for model in app.models %}
+                  <tr class="model-{{ model.object_name|lower }}{% if model.admin_url in request.path %} current-model{% endif %}">
+                    <td style="width:85%">
+                    {% if model.admin_url %}
+                      <a href="{{ model.admin_url }}"{% if model.admin_url in request.path %} aria-current="page"{% endif %}>{{ model.name }}</a>
+                    {% else %}
+                      {{ model.name }}
+                    {% endif %}
+                    </td>
+                    
+                    <td style="width:15%">
+                    {% if model.add_url %}
+                      <a href="{{ model.add_url }}" class="addlink label theme-bg text-white f-12">{% trans 'Add' %}</a>
+                    {% endif %}
 
-              {% if model.add_url %}
-                <td><a href="{{ model.add_url }}" class="addlink">{% trans 'Add' %}</a></td>
-              {% else %}
-                <td></td>
-              {% endif %}
-
-              {% if model.admin_url and show_changelinks %}
-                {% if model.view_only %}
-                  <td><a href="{{ model.admin_url }}" class="viewlink">{% trans 'View' %}</a></td>
-                {% else %}
-                  <td><a href="{{ model.admin_url }}" class="changelink">{% trans 'Change' %}</a></td>
-                {% endif %}
-              {% elif show_changelinks %}
-                <td></td>
-              {% endif %}
-            </tr>
-          {% endfor %}
-        </table>
-      </div>
+                    {% if model.view_only %}
+                      <a href="{{ model.admin_url }}" class="viewlink label theme-bg2 text-white f-12">{% trans 'View' %}</a>
+                    {% else %}
+                      <a href="{{ model.admin_url }}" class="changelink label theme-bg2 text-white f-12">{% trans 'Change' %}</a>
+                    {% endif %}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </table>
+            </div>
+            <br class="clear">
+          </div>
+        </div>
     {% endfor %}
   {% else %}
     <p>{% trans 'You don’t have permission to view or edit anything.' %}</p>
