@@ -2,7 +2,7 @@ from collections import OrderedDict
 
 from django import forms
 from django.contrib.admin import widgets
-from django.contrib.admin.filters import FieldListFilter
+from django.contrib.admin.filters import FieldListFilter, RelatedFieldListFilter
 from django.forms.widgets import Media
 from django.utils.translation import gettext_lazy as _
 
@@ -35,12 +35,11 @@ class InputFilter(FieldListFilter):
         return [self.parameter_name]
 
 
-class AutoCompleteFilter(FieldListFilter):
+class AutoCompleteFilter(RelatedFieldListFilter):
     _request_key = 'DJANGO_ASH_ATOCOMPLETE_ADMIN_MEDIA'
     template = 'filters/auto_complete_filter.html'
 
     def __init__(self, field, request, params, model, model_admin, field_path):
-        self.parameter_name = field.name
         super().__init__(field, request, params, model, model_admin, field_path)
         self.model_admin = model_admin
         self.form = self.get_form(request)
@@ -49,28 +48,28 @@ class AutoCompleteFilter(FieldListFilter):
         return ((),)
 
     def value(self):
-        return self.used_parameters.get(self.parameter_name)
+        return self.used_parameters.get(self.lookup_kwarg)
 
     def choices(self, changelist):
         yield {
             'selected': self.value() is None,
-            'query_string': changelist.get_query_string(remove=[self.parameter_name]),
+            'query_string': changelist.get_query_string(remove=[self.lookup_kwarg]),
             'query_parts': (
                 (k, v)
                 for k, v in changelist.get_filters_params().items()
-                if k != self.parameter_name
+                if k != self.lookup_kwarg
             )
         }
 
     def expected_parameters(self):
-        return [self.parameter_name]
+        return [self.lookup_kwarg]
 
     def get_form(self, request):
         form_class = self._get_form_class(request)
         return form_class(self.used_parameters or None)
 
     def _get_form_class(self, request):
-        fields = self._get_form_fields()
+        fields = self._get_form_fields(request)
 
         form_class = type(
             str('AutoCompleteForm'),
@@ -89,10 +88,10 @@ class AutoCompleteFilter(FieldListFilter):
 
         return form_class
 
-    def _get_form_fields(self):
+    def _get_form_fields(self, request):
         return OrderedDict(
             (
-                (self.parameter_name, forms.ModelChoiceField(
+                (self.lookup_kwarg, forms.ModelChoiceField(
                     self.field.remote_field.model.objects.all(),
                     label='',
                     widget=widgets.AutocompleteSelect(

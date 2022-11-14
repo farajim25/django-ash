@@ -356,7 +356,7 @@ body.popup .submit-row {
     width: 2.2em;
 }
 
-.vTextField, .vUUIDField {
+.vTextField, .vUUIDField, .vFileField {
     max-width: 25em;
 }
 

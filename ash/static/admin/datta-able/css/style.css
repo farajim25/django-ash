@@ -10656,7 +10656,7 @@ div.code-toolbar > .toolbar span:hover {
   border-radius: 15px;
 }
 .app-table td {
-  border-top: 0;
-  border-bottom: 1px solid #eaeaea;
+  border-top: 0 !important;
+  border-bottom: 1px solid #eaeaea11;
 }
 /**====== Django ASH css end ======**/
