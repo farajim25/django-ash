@@ -64,6 +64,12 @@ class AutoCompleteFilter(RelatedFieldListFilter):
     def expected_parameters(self):
         return [self.lookup_kwarg]
 
+    def has_output(self):
+        return True
+
+    def field_choices(self, field, request, model_admin):
+        return []
+
     def get_form(self, request):
         form_class = self._get_form_class(request)
         return form_class(self.used_parameters or None)
@@ -88,18 +94,20 @@ class AutoCompleteFilter(RelatedFieldListFilter):
 
         return form_class
 
+    def _get_field_widget(self, request):
+        return widgets.AutocompleteSelect(
+            field=self.field,
+            admin_site=self.model_admin.admin_site,
+            attrs={'style': "width: 100%", 'autocomplete-filter': True}
+        )
+
     def _get_form_fields(self, request):
         return OrderedDict(
             (
                 (self.lookup_kwarg, forms.ModelChoiceField(
                     self.field.remote_field.model.objects.all(),
                     label='',
-                    widget=widgets.AutocompleteSelect(
-                        field=self.field,
-                        admin_site=self.model_admin.admin_site,
-                        attrs={'style': "width: 100%",
-                               'autocomplete-filter': True}
-                    ),
+                    widget=self._get_field_widget(request),
                     required=False,
                     initial=self.value(),
                 )),
