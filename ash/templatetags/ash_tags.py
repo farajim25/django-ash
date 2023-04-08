@@ -48,8 +48,22 @@ def ash_form_field_widget_class_setter(widget, **kwargs):
             widget.template_name = 'admin/widgets/split_datetime_small.html'
 
         for w in widget.widgets:
-            ash_form_field_widget_class_setter(w)
+            ash_form_field_widget_class_setter(w, wrapper=False)
 
+        return widget
+
+    if isinstance(widget, AdminWidgets.AdminDateWidget):
+        wrapper = kwargs.get("wrapper", True)
+        widget.template_name = 'admin/widgets/date_wrapper.html' if wrapper else 'admin/widgets/date.html'
+        old_class = widget.attrs.get('class', '')
+        widget.attrs['class'] = f'{old_class} vDateField {default_new_class}'
+        return widget
+
+    if isinstance(widget, AdminWidgets.AdminTimeWidget):
+        wrapper = kwargs.get("wrapper", True)
+        widget.template_name = 'admin/widgets/time_wrapper.html' if wrapper else 'admin/widgets/time.html'
+        old_class = widget.attrs.get('class', '')
+        widget.attrs['class'] = f'{old_class} vTimeField {default_new_class}'
         return widget
 
     if isinstance(widget, AdminWidgets.RelatedFieldWidgetWrapper):

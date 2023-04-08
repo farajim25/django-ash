@@ -1,0 +1,10 @@
+<div class="col-12 mt-1">
+  <div class="input-group bg-transparent">
+      {% if time_label %}
+      <div class="input-group-prepend">
+        <div class="input-group-text px-2">{{ time_label }}</div>
+      </div>
+      {% endif %}
+      {% include "django/forms/widgets/input.html" %}
+  </div>
+</div>
