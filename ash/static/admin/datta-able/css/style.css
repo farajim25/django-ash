@@ -10604,6 +10604,22 @@ div.code-toolbar > .toolbar span:hover {
 }
 
 /**====== Django ASH css start ======**/
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  opacity: 0.8;
+}
+
+.clickable:active {
+  opacity: 0.5;
+}
+
+a.clickable {
+  color: var(--primary) !important;
+}
+
 .side-bar .table tr:first-child td {
   border-top: 0;
 }
