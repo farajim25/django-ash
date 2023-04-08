@@ -11,7 +11,7 @@ class InputFilter(FieldListFilter):
     template = 'filters/input_filter.html'
 
     def __init__(self, field, request, params, model, model_admin, field_path):
-        self.parameter_name = field.name
+        self.parameter_name = field_path
         super().__init__(field, request, params, model, model_admin, field_path)
 
     def lookups(self, request, model_admin):
