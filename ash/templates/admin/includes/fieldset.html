@@ -4,15 +4,15 @@
         <div class="description">{{ fieldset.description|safe }}</div>
     {% endif %}
     {% for line in fieldset %}
-        <div class="row form-row{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% if not line.has_visible_field %} hidden{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
-            {% if line.fields|length_is:'1' %}
+        <div class="row form-row{% if line.fields|length == 1 and line.errors %} errors{% endif %}{% if not line.has_visible_field %} hidden{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
+            {% if line.fields|length == 1 %}
                 <div class="offset-md-2 col-md-10 error-container">
                     {{ line.errors }}
                 </div>
             {% endif %}
             {% for field in line %}
-                {% comment %} <div class="" {% if not line.fields|length_is:'1' %} class="fieldBox{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.field.is_hidden %} hidden{% endif %}"{% elif field.is_checkbox %} class="checkbox-row"{% endif %}> {% endcomment %}
-                        {% if not line.fields|length_is:'1' and not field.is_readonly %}
+                {% comment %} <div class="" {% if not line.fields|length == 1 %} class="fieldBox{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.field.is_hidden %} hidden{% endif %}"{% elif field.is_checkbox %} class="checkbox-row"{% endif %}> {% endcomment %}
+                        {% if not line.fields|length == 1 and not field.is_readonly %}
                             <div class="offset-md-2 col-md-10 error-container">
                                 {{ field.errors }}
                              </div>
